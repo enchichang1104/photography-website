@@ -1,24 +1,35 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { site, photos, heroPhotos } from '../data/site.js'
 import Photo from '../components/Photo.jsx'
 
+const INTERVAL = 5000 // ms between automatic slides
+
 export default function Home() {
-  // .slice(0, 6) takes the first six photographs for the preview grid.
   const preview = photos.slice(0, 6)
-
-  // Which hero photo is currently showing.
   const [active, setActive] = useState(0)
+  const timerRef = useRef(null)
 
+  function next() {
+    setActive((i) => (i + 1) % heroPhotos.length)
+  }
+  function prev() {
+    setActive((i) => (i - 1 + heroPhotos.length) % heroPhotos.length)
+  }
+  function goTo(i) {
+    setActive(i)
+  }
+
+  // Restart the auto-advance timer every time `active` changes —
+  // whether that change came from the timer itself or a manual click.
+  // This is what makes a manual click "reset the clock" instead of
+  // the auto-advance firing again a moment later.
   useEffect(() => {
-    // Every 5 seconds, move to the next photo (wrapping back to 0 at the end).
-    const timer = setInterval(() => {
-      setActive((i) => (i + 1) % heroPhotos.length)
-    }, 5000)
-    // Stop the timer if the component ever unmounts — prevents a memory leak.
-    return () => clearInterval(timer)
-  }, [])
-
+    clearInterval(timerRef.current)
+    timerRef.current = setInterval(next, INTERVAL)
+    return () => clearInterval(timerRef.current)
+  }, [active])
+  
   return (
     <>
       <section className="hero-text">
@@ -28,7 +39,6 @@ export default function Home() {
       </section>
       
       <section className="hero">
-
         {heroPhotos.map((p, i) => (
           <Photo
             key={p.src}
@@ -38,6 +48,20 @@ export default function Home() {
             className={i === active ? 'hero-img is-active' : 'hero-img'}
           />
         ))}
+
+        <button className="hero-nav hero-prev" onClick={prev} aria-label="Previous photo">‹</button>
+        <button className="hero-nav hero-next" onClick={next} aria-label="Next photo">›</button>
+
+        <div className="hero-dots">
+          {heroPhotos.map((p, i) => (
+            <button
+              key={p.src}
+              className={i === active ? 'dot is-active' : 'dot'}
+              onClick={() => goTo(i)}
+              aria-label={`Show photo ${i + 1}`}
+            />
+          ))}
+        </div>
       </section>
 
       <section className="section">

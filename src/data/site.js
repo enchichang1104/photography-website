@@ -54,9 +54,8 @@ export const heroPhotos = [
   { src: '/photos/04.jpg', alt: 'Bangkok' },
   { src: '/photos/05.jpg', alt: 'Bangkok' },
   { src: '/photos/06.jpg', alt: 'Football' },
-  { src: '/photos/07.jpg', alt: 'Football' },
-  { src: '/photos/08.jpg', alt: 'Football' },
-  { src: '/photos/09.jpg', alt: 'Concert' },
-  { src: '/photos/10.jpg', alt: 'Concert' },
-  { src: '/photos/11.jpg', alt: 'Concert' },
+  { src: '/photos/07.jpg', alt: 'Football'},
+  { src: '/photos/08.jpg', alt: 'Football'},
+  { src: '/photos/09.jpg', alt: 'Concert'},
+  { src: '/photos/10.jpg', alt: 'Concert'},
 ]
