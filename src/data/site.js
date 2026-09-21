@@ -1,32 +1,26 @@
-// ─────────────────────────────────────────────────────────────
-//  EDIT THIS FILE FIRST. Almost everything you want to change
-//  about the site lives here, so you don't have to hunt through
-//  the components.
-// ─────────────────────────────────────────────────────────────
+//所有想更改的內容都在這個文件中
 
 export const site = {
-  name: 'Your Name',
-  tagline: 'Portrait and landscape photography in Hualien, Taiwan',
-  email: 'hello@yourdomain.com',
-  instagram: 'https://instagram.com/yourhandle',
+  name: 'ENCHI CHANG',
+  tagline: '紀錄瞬間的爆發與靈魂。專注於人像與運動攝影',
+  email: 'chang20021104@gmail.com',
+  instagram: 'https://www.instagram.com/photoenchigrapher?stkn=MXNpc3l3ZDV0c2M5cw%3D%3D&utm_source=qr',
 
   // ── Your Google Form ──────────────────────────────────────
   // 1. Open your form → Send → the link icon (🔗) → copy → formLink
   // 2. Open your form → Send → the < > icon → copy ONLY the src="..."
   //    value out of the iframe → formEmbed
   formLink: 'https://forms.gle/REPLACE_ME',
-  formEmbed: 'https://docs.google.com/forms/d/e/REPLACE_ME/viewform?embedded=true',
+  formEmbed: 'https://forms.gle/tjtMUed4PJh5e9uB8',
 
   about: [
-    "I'm a photographer based in Hualien. I started shooting because I wanted to remember what the light did on the coast road in the late afternoon, and I never really stopped.",
-    "I work slowly and quietly. Most of my sessions are two or three hours, outdoors, and the best frames usually arrive once people forget I'm there. If that sounds like what you want, get in touch.",
+    "我是一名人像與運動攝影師，目前駐點於台灣花蓮。我的攝影風格結合了精準的動態捕捉與深刻的人物故事刻畫。無論是在籃球場上的揮汗瞬間、足球場上的極速奔馳，我致力於捕捉那些稍縱即逝的爆發性時刻。",
+    "同時，我也喜歡透過人像來紀錄每個靈魂獨特的質感。目前軟體工程學系的研究生",
   ],
 
   pricing: [
-    { name: 'Portrait session', price: 'from NT$6,000', detail: '2 hours, one location, 25 edited images' },
-    { name: 'Couple or family',  price: 'from NT$8,000', detail: '2 hours, one location, 40 edited images' },
-    { name: 'Wedding',           price: 'from NT$35,000', detail: 'Full day coverage, 400+ edited images' },
-    { name: 'Commercial',        price: 'On request', detail: 'Product, venue and editorial work' },
+    { name: '人像攝影', price: 'from NT$1,500', detail: ' 2 hours, one location, 25-30 edited images' },
+    { name: '運動攝影',  price: 'from NT$1000', detail: '1 hours, one location, 50-70 edited images' },
   ],
 }
 
@@ -53,4 +47,16 @@ export const photos = [
 ]
 
 // The one image on the home page. Make it your strongest.
-export const heroPhoto = { src: '/photos/01.jpg', alt: 'A woman laughing on a beach at sunset' }
+export const heroPhotos = [
+  { src: '/photos/01.jpg', alt: 'Bangkok' },
+  { src: '/photos/02.jpg', alt: 'Bangkok' },
+  { src: '/photos/03.jpg', alt: 'Bangkok' },
+  { src: '/photos/04.jpg', alt: 'Bangkok' },
+  { src: '/photos/05.jpg', alt: 'Bangkok' },
+  { src: '/photos/06.jpg', alt: 'Football' },
+  { src: '/photos/07.jpg', alt: 'Football' },
+  { src: '/photos/08.jpg', alt: 'Football' },
+  { src: '/photos/09.jpg', alt: 'Concert' },
+  { src: '/photos/10.jpg', alt: 'Concert' },
+  { src: '/photos/11.jpg', alt: 'Concert' },
+]

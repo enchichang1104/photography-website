@@ -101,10 +101,18 @@ p  { margin: 0 0 16px; max-width: 62ch; }
 .section.narrow { max-width: 760px; }
 
 /* ── Home hero ───────────────────────────────────────────── */
-.hero { position: relative; }
+.hero { position: relative; height: min(78vh, 720px); overflow: hidden; }
 .hero-img { width: 100%; height: min(78vh, 720px); object-fit: cover; }
+
+.hero-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-img.is-active { opacity: 1; }
 .hero-text {
-  max-width: var(--max); margin: 0 auto;
+  max-width: var(--max); margin: 30px auto;
   padding: 34px 22px 0;
 }
 .hero-text h1 { margin-bottom: 8px; }
