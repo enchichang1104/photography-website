@@ -1,5 +1,18 @@
 //所有想更改的內容都在這個文件中
 
+// The one image on the home page. Make it your strongest.
+export const heroPhotos = [
+  { src: '/photos/01.jpg', alt: 'Bangkok' },
+  { src: '/photos/02.jpg', alt: 'Bangkok' },
+  { src: '/photos/03.jpg', alt: 'Bangkok' },
+  { src: '/photos/05.jpg', alt: 'Bangkok' },
+  { src: '/photos/06.jpg', alt: 'Football' },
+  { src: '/photos/07.jpg', alt: 'Football'},
+  { src: '/photos/08.jpg', alt: 'Football'},
+  { src: '/photos/09.jpg', alt: 'Concert'},
+  { src: '/photos/10.jpg', alt: 'Concert'},
+]
+
 // Small highlight block, second row of the hero area.
 export const stats = [
   { value: '500+', label: 'Sessions shot' },
@@ -8,12 +21,112 @@ export const stats = [
   { value: '24h',  label: 'Reply time' },
 ]
 
+export const categories = ['Portrait', 'Sports', 'Landscape', 'Concert']
+
+export const recentWork = [
+  {
+    category: 'Portrait',
+    src: '/photos/portrait/DSCF6833.JPG',
+    alt: 'A portrait taken in shade against a white wall',
+    title: 'Faces, unscripted',
+    blurb: 'Quiet light and honest expressions, one person at a time.',
+  },
+  {
+    category: 'Sports',
+    src: '/photos/07.jpg',
+    alt: 'An athlete mid-motion on the field',
+    title: 'Frozen in motion',
+    blurb: 'The split-second burst of effort, caught before it passes.',
+  },
+  {
+    category: 'Landscape',
+    src: '/photos/03.jpg',
+    alt: 'Rice terraces in the East Rift Valley',
+    title: 'Where the light lands',
+    blurb: 'Wide open spaces around Hualien, shot at the hours that matter.',
+  },
+  {
+    category: 'Concert',
+    src: '/photos/10.jpg',
+    alt: 'A performer under stage lighting',
+    title: 'Sound made visible',
+    blurb: 'Stage light, crowd energy, and the moments between songs.',
+  },
+]
+
+export const photos = [
+  { src: '/photos/portrait/DSCF6833.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF6347.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF6426.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF6435.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF6458.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF6680.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF6730.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF6819.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF6838.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/2O0A8642.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/2O0A8647.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/2O0A8664.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/2O0A8851.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/2O0A8987.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF5762.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF5766.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF5774.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF5776.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF5796.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF7095.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF7131.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF7144.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF7161.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF7182.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF7245.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF7320.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF7415.JPG', category: 'Portrait'},
+  { src: '/photos/portrait/DSCF7540.JPG', category: 'Portrait'},
+  { src: '/photos/sports/2O0A5698.JPG', category: 'Sports'},
+  { src: '/photos/sports/2O0A5838.JPG', category: 'Sports'},
+  { src: '/photos/sports/9A552CD3-06EE-4642-A14A-912AE288A6D2.jpeg', category: 'Sports'},
+  { src: '/photos/sports/2O0A6019.JPG', category: 'Sports'},
+  { src: '/photos/sports/405188CB-EC35-49D1-8E77-50BBD0A395C4.jpeg', category: 'Sports'},
+
+]
+
 export const howItWorks = [
   { icon: 'search',   title: 'Choose a session', text: 'Portrait, sports, or action shooting — pick what fits.' },
   { icon: 'calendar', title: 'Pick a date',       text: 'Tell me your preferred date and a backup date.' },
   { icon: 'card',     title: 'Confirm details',   text: "I'll reply within 48 hours to lock in the plan." },
   { icon: 'camera',   title: 'Shoot day',         text: 'We meet, shoot, and I handle the rest.' },
 ]
+
+export const pricing = [
+  { name: 'Portrait', price: 'from NT$1,500', detail: ' 2 hours, one location, 25-30 edited images' },
+  { name: 'Sports Photography',  price: 'from NT$1000', detail: '1 hours, one location, 50-70 edited images' },
+]
+
+// The two cards shown in the Sessions section on the homepage.
+// src is chosen by hand — pick whichever photo best represents
+// each service, independent of the Gallery's category filters.
+export const sessionTypes = [
+  {
+    name: 'Portrait',
+    src: '/photos/cover-portrait.jpg',           // ← swap for your chosen cover photo
+    alt: 'A portrait taken in shade against a white wall',
+    price: pricing.find((p) => p.name === 'Portrait')?.price,
+  },
+  {
+    name: 'Sports Photography',
+    src: '/photos/cover-sports.jpg',           // ← swap for your chosen cover photo
+    alt: 'An athlete mid-motion on the field',
+    price: pricing.find((p) => p.name === 'Sports Photography')?.price,
+  },
+]
+
+
+
+
+
+
+
 
 // ── The floating quick-check card in the hero ──────────────
 // This can genuinely pre-fill your real Google Form, not just
@@ -39,13 +152,6 @@ export const highlight = {
   text: 'From first light to final edit, every shoot is planned around what actually flatters you — the place, the time of day, the mood.',
 }
 
-// The four-icon "why choose us" row.
-export const features = [
-  { icon: 'clock',  title: 'Fast turnaround',   text: 'Edited gallery within 7 days, always.' },
-  { icon: 'sun',    title: 'Natural light',     text: 'Shot outdoors, in the light that suits you.' },
-  { icon: 'heart',  title: 'Personal approach', text: 'Every session is planned around you.' },
-  { icon: 'tag',    title: 'Honest pricing',    text: 'Clear rates, no surprises after the shoot.' },
-]
 
 // Testimonials carousel. Replace with real client quotes as you get them.
 export const testimonials = [
@@ -95,40 +201,8 @@ export const site = {
 // alt       describes the picture. Screen readers read it out loud
 //           and Google reads it too, so write a real sentence.
 
-export const categories = ['Portrait', 'Landscape', 'Event']
+// export const categories = ['Portrait', 'Sports']
 
-export const photos = [
-  { src: '/photos/01.jpg', category: 'Portrait',  alt: 'A woman laughing on a beach at sunset' },
-  { src: '/photos/02.jpg', category: 'Landscape', alt: 'Morning mist over Taroko Gorge' },
-  { src: '/photos/03.jpg', category: 'Portrait',  alt: 'A man in a doorway, side lit' },
-  { src: '/photos/04.jpg', category: 'Event',     alt: 'Guests dancing at a wedding reception' },
-  { src: '/photos/05.jpg', category: 'Landscape', alt: 'Rice terraces in the East Rift Valley' },
-  { src: '/photos/06.jpg', category: 'Portrait',  alt: 'A child running through tall grass' },
-  { src: '/photos/07.jpg', category: 'Event',     alt: 'A bride adjusting her dress before the ceremony' },
-  { src: '/photos/08.jpg', category: 'Landscape', alt: 'The Pacific coastline from Highway 11' },
-  { src: '/photos/09.jpg', category: 'Portrait',  alt: 'A portrait taken in shade against a white wall' },
-]
 
-// One photo, used as the hero background. Pick your strongest,
-// widest shot — something with room at the top or center for text
-// to sit over without covering a face.
-export const heroBackground = {
-  src: '/photos/03.jpg',
-  alt: 'The Pacific coastline from Highway 11',
-  focus: 'center 40%',
-  focusMobile: 'center 30%',
-}
 
-// The one image on the home page. Make it your strongest.
-export const heroPhotos = [
-  { src: '/photos/01.jpg', alt: 'Bangkok' },
-  { src: '/photos/02.jpg', alt: 'Bangkok' },
-  { src: '/photos/03.jpg', alt: 'Bangkok' },
-  { src: '/photos/04.jpg', alt: 'Bangkok' },
-  { src: '/photos/05.jpg', alt: 'Bangkok' },
-  { src: '/photos/06.jpg', alt: 'Football' },
-  { src: '/photos/07.jpg', alt: 'Football'},
-  { src: '/photos/08.jpg', alt: 'Football'},
-  { src: '/photos/09.jpg', alt: 'Concert'},
-  { src: '/photos/10.jpg', alt: 'Concert'},
-]
+

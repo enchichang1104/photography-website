@@ -1,29 +1,32 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
-import { site, categories, photos, heroPhotos, stats, howItWorks } from '../data/site.js'
 import Photo from '../components/Photo.jsx'
+import { site, categories, stats, heroPhotos, howItWorks, recentWork, sessionTypes } from '../data/site.js'
 import Icon from '../components/Icon.jsx'
 import QuickBooking from '../components/QuickBooking.jsx'
 import Testimonials from '../components/Testimonials.jsx'
 
-const INTERVAL = 5000
+//Hero Slideshow (首頁輪播)
+const INTERVAL = 5000  // 自動輪播間隔時間（5秒）
 
 export default function Home() {
-  const [active, setActive] = useState(0)
-  const timerRef = useRef(null)
+  const [active, setActive] = useState(0) // 目前顯示的輪播圖片索引 (Index)
+  const timerRef = useRef(null)           // 用來儲存 setInterval 的參考，避免重繪
 
+  // 控制邏輯（使用餘數運算 % 達成循環輪播）
   function next() { setActive((i) => (i + 1) % heroPhotos.length) }
   function prev() { setActive((i) => (i - 1 + heroPhotos.length) % heroPhotos.length) }
 
-  useEffect(() => {
-    clearInterval(timerRef.current)
-    timerRef.current = setInterval(next, INTERVAL)
-    return () => clearInterval(timerRef.current)
+  useEffect(() => { 
+    clearInterval(timerRef.current)                   // 每次 active 改變時，先清除舊的計時器
+    timerRef.current = setInterval(next, INTERVAL)    // 重新啟動 5 秒計時器
+    return () => clearInterval(timerRef.current)      // 組件卸載或更新時的清理函數
   }, [active])
 
+  // Data Mapping
   const collectionCovers = categories.map((cat) => ({
     name: cat,
-    photo: photos.find((p) => p.category === cat) || photos[0],
+    photo: recentWork.find((p) => p.category === cat) || recentWork[0],
   }))
 
   return (
@@ -45,9 +48,6 @@ export default function Home() {
         ))}
         <div className="hero-scrim" />
 
-        <button className="hero-nav hero-prev" onClick={prev} aria-label="Previous photo">‹</button>
-        <button className="hero-nav hero-next" onClick={next} aria-label="Next photo">›</button>
-
         <div className="hero-overlay">
           <h1>{site.name}</h1>
           <p>{site.tagline}</p>
@@ -65,15 +65,24 @@ export default function Home() {
         ))}
       </div>
 
-      {/* ── Recent work, 2x2 ── */}
+      {/* ── Recent work, one card per category ── */}
       <section className="section">
         <p className="eyebrow">Recent work</p>
         <h2>A closer look</h2>
+
         <div className="work-grid">
-          {photos.slice(0, 4).map((p) => (
-            <Photo key={p.src} src={p.src} alt={p.alt} className="work-img" />
+          {recentWork.map((w) => (
+            <Link to={`/gallery?category=${encodeURIComponent(w.category)}`} className="work-card" key={w.category}>
+              <Photo src={w.src} alt={w.alt} className="work-card-img" />
+              <div className="work-card-body">
+                <p className="work-card-label">{w.category}</p>
+                <h3>{w.title}</h3>
+                <p className="muted">{w.blurb}</p>
+              </div>
+            </Link>
           ))}
         </div>
+
         <Link to="/gallery" className="textlink">See the full portfolio</Link>
       </section>
 
@@ -94,37 +103,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Session types, priced ── */}
-      {/* ── Session types, destination-card style ── */}
+      {/* ── Session types, manually chosen covers ── */}
       <section className="section">
-        <div className="collections-head">
-          <div>
-            <p className="eyebrow">Sessions</p>
-            <h2 style={{ marginBottom: 0 }}>Pick what fits</h2>
-          </div>
-          <div className="filters">
-            {['All', ...categories].map((c) => (
-              <button key={c} className={c === 'All' ? 'chip is-on' : 'chip'}>{c}</button>
-            ))}
-          </div>
-        </div>
+        <p className="eyebrow">category</p>
+        <h2>Pick what fits</h2>
 
-        <div className="collections">
-          {collectionCovers.map((c) => {
-            const price = site.pricing.find((p) => p.name.toLowerCase().includes(c.name.toLowerCase()))
-            return (
-              <div className="collection-card" key={c.name}>
-                <Photo src={c.photo.src} alt={c.photo.alt} className="collection-img" />
-                <div className="collection-scrim" />
-                <button className="collection-bookmark" aria-label={`Save ${c.name}`}>♡</button>
-                <div className="collection-caption">
-                  <h3>{c.name}</h3>
-                  <p>{price ? price.price : 'See pricing'}</p>
-                  <Link to="/pricing">Explore →</Link>
-                </div>
+        <div className="collections collections-two">
+          {sessionTypes.map((s) => (
+            <div className="collection-card" key={s.name}>
+              <Photo src={s.src} alt={s.alt} className="collection-img" />
+              <div className="collection-scrim" />
+              <div className="collection-caption">
+                <h3>{s.name}</h3>
+                <p>{s.price}</p>
+                <Link to="/pricing">Explore →</Link>
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
       </section>
 
