@@ -1,11 +1,9 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import { site } from '../data/site.js'
 
 export default function Nav() {
-  const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const menuRef = useRef(null)
   const { pathname } = useLocation()
 
   const links = [
@@ -14,68 +12,42 @@ export default function Nav() {
     { to: '/pricing',  label: 'Pricing' },
   ]
 
+  // 捲動超過 60px 就從透明變實色
   useEffect(() => {
     function onScroll() { setScrolled(window.scrollY > 60) }
-    onScroll() // run once on mount / page change, in case already scrolled
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [pathname])
 
-  useEffect(() => {
-    function onClickOutside(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) setOpen(false)
-    }
-    document.addEventListener('mousedown', onClickOutside)
-    return () => document.removeEventListener('mousedown', onClickOutside)
-  }, [])
-
-  // Only float transparent on Home, where a dark hero sits behind it.
-  // Every other page gets a normal solid nav from the start.
+  // 只有首頁（有深色 hero）在頂端時才透明，其他頁一律實色
   const floating = pathname === '/' && !scrolled
-
-  
 
   return (
     <header className={floating ? 'nav nav-float' : 'nav nav-solid'}>
       <div className="nav-in">
-        <Link to="/" className="wordmark" onClick={() => setOpen(false)}>
-          {site.name}
-        </Link>
-        <Link to="/" className="wordmark" onClick={() => setOpen(false)}>
-          <span className="logo-mark" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M3 15c2.5-3 5.5-3 8 0s5.5 3 8 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-              <path d="M3 10c2.5-3 5.5-3 8 0s5.5 3 8 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity=".5"/>
-            </svg>
-          </span>
-          {site.name}
-        </Link>
+        {/* 左：Logo */}
+        <Link to="/" className="wordmark">{site.name}</Link>
 
+        {/* 中：連結 */}
+        <nav className="nav-links">
+          {links.map((l) => (
+            <NavLink key={l.to} to={l.to}>{l.label}</NavLink>
+          ))}
+        </nav>
+
+        {/* 右：Instagram + 預約按鈕 */}
         <div className="nav-right">
-          <Link to="/book" className="btn btn-sm" onClick={() => setOpen(false)}>
-            Book a session
-          </Link>
+          <a className="nav-social" href={site.instagram} target="_blank" rel="noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r=".6" fill="currentColor" />
+            </svg>
+            <span>Instagram</span>
+          </a>
 
-          <div className="menu" ref={menuRef}>
-            <button
-              className="menu-toggle"
-              aria-expanded={open}
-              aria-label="Open menu"
-              onClick={() => setOpen((o) => !o)}
-            >
-              <span></span><span></span><span></span>
-            </button>
-
-            {open && (
-              <nav className="menu-panel">
-                {links.map((l) => (
-                  <NavLink key={l.to} to={l.to} onClick={() => setOpen(false)}>
-                    {l.label}
-                  </NavLink>
-                ))}
-              </nav>
-            )}
-          </div>
+          <Link to="/book" className="btn btn-sm">Book a session</Link>
         </div>
       </div>
     </header>

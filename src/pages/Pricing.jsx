@@ -9,6 +9,9 @@ export default function Pricing() {
         Every session is different, so treat these as starting points.
         Tell me what you have in mind and I'll quote properly.
       </p>
+      <p className="muted">
+        Delivered photos will include basic color grading only; detailed photo retouching/editing is not included.
+      </p>
 
       <ul className="price-list">
         {site.pricing.map((item) => (

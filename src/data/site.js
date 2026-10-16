@@ -88,7 +88,25 @@ export const photos = [
   { src: '/photos/sports/9A552CD3-06EE-4642-A14A-912AE288A6D2.jpeg', category: 'Sports'},
   { src: '/photos/sports/2O0A6019.JPG', category: 'Sports'},
   { src: '/photos/sports/405188CB-EC35-49D1-8E77-50BBD0A395C4.jpeg', category: 'Sports'},
-
+  { src: '/photos/landscape/EA94BAB4-0055-47AE-B48C-EF3DD99C85F5_1_105_c.jpeg', category: 'Landscape'},
+  { src: '/photos/landscape/9B2A0B92-C0E6-4D56-88F5-060A107FC6A3_1_105_c.jpeg', category: 'Landscape'},
+  { src: '/photos/landscape/9F29F4D7-0CCD-4696-A020-EE3EB82E9D4B_1_105_c.jpeg', category: 'Landscape'},
+  { src: '/photos/landscape/2A47E4E5-10EB-4583-AA9D-E386F335C4B8_1_105_c.jpeg', category: 'Landscape'},
+  { src: '/photos/landscape/5FEB698F-3CCA-46FB-B4D7-0D04ADABAB58_1_105_c.jpeg', category: 'Landscape'},
+  { src: '/photos/landscape/6C6FFAEB-7521-4FFC-9AF6-89B6BFB3E1A0_1_105_c.jpeg', category: 'Landscape'},
+  { src: '/photos/landscape/D5FAE554-B29A-4D74-8DAF-B854225C4611_1_105_c.jpeg', category: 'Landscape'},
+  { src: '/photos/concert/B6CD49C6-A2ED-4FBF-A6E2-D1007C3933DF_4_5005_c.jpeg', category: 'Concert'},
+  { src: '/photos/concert/79D3A18F-9EFA-468D-99CF-F1D2FE9FA0D7_1_105_c.jpeg', category: 'Concert'},
+  { src: '/photos/concert/93DA88E7-C704-46C8-BEB6-FC528EF3991C_1_105_c.jpeg', category: 'Concert'},
+  { src: '/photos/concert/C48005D7-B7FD-4101-81B6-16A5F2CD5D4C_1_105_c.jpeg', category: 'Concert'},
+  { src: '/photos/concert/F534F0F7-B73A-4496-93C8-10793A994E33.jpeg', category: 'Concert'},
+  { src: '/photos/concert/DD197946-FE4F-4F14-8218-DFA1EC98C27C_1_105_c.jpeg', category: 'Concert'},
+  { src: '/photos/concert/1721FA72-9FB1-4FB2-9502-D9F38C7807A8_1_105_c.jpeg', category: 'Concert'},
+  { src: '/photos/concert/85AEB383-44B5-457B-A570-FB6F1FC530B5_1_105_c.jpeg', category: 'Concert'},
+  { src: '/photos/concert/A04C4537-7E02-4E3C-ABA0-25C9A02CB754_1_102_o.jpeg', category: 'Concert'},
+  { src: '/photos/concert/657B328A-1757-4DBC-9029-024A7979B8BC_1_102_o.jpeg', category: 'Concert'},
+  { src: '/photos/concert/C8C76B43-36A7-4FB9-BD05-803A53F04CB6.jpeg', category: 'Concert'},
+  { src: '/photos/concert/F4AFF22F-D77D-4036-AD90-E08F036D8456_1_102_o.jpeg', category: 'Concert'},
 ]
 
 export const howItWorks = [
@@ -121,25 +139,7 @@ export const sessionTypes = [
   },
 ]
 
-
-
-
-
-
-
-
 // ── The floating quick-check card in the hero ──────────────
-// This can genuinely pre-fill your real Google Form, not just
-// link to it blank. To wire that up:
-//   1. Open your live Google Form.
-//   2. Click the ⋮ menu (top right) → "Get pre-filled link".
-//   3. Fill in a sample answer for "Type of session" and submit.
-//   4. Copy the long URL it gives you. It looks like
-//      ...viewform?usp=pp_url&entry.123456789=Portrait
-//   5. The number after entry. for that question is what goes
-//      below. Repeat for the date question.
-// Leave either blank and that field is simply skipped — the
-// button still works, it just opens the form unfilled.
 export const quickBookingForm = {
   sessionTypeEntry: '', // e.g. 'entry.123456789'
   dateEntry: '',        // e.g. 'entry.987654321'
@@ -171,38 +171,29 @@ export const closingCta = {
 
 export const site = {
   name: 'ENCHI CHANG',
-  tagline: '紀錄瞬間的爆發與靈魂。專注於人像與運動攝影',
-  email: 'chang20021104@gmail.com',
+  tagline: 'Capturing explosive power and soul. Focused on portrait and sports photography.',
+  email: 'enchichang1104@gmail.com',
   instagram: 'https://www.instagram.com/photoenchigrapher?stkn=MXNpc3l3ZDV0c2M5cw%3D%3D&utm_source=qr',
 
   // ── Your Google Form ──────────────────────────────────────
-  // 1. Open your form → Send → the link icon (🔗) → copy → formLink
-  // 2. Open your form → Send → the < > icon → copy ONLY the src="..."
-  //    value out of the iframe → formEmbed
   formLink: 'https://forms.gle/REPLACE_ME',
   formEmbed: 'https://forms.gle/tjtMUed4PJh5e9uB8',
 
+  aboutTitle: 'EN-CHI CHANG',
+
   about: [
-    "我是一名人像與運動攝影師，目前駐點於台灣花蓮。我的攝影風格結合了精準的動態捕捉與深刻的人物故事刻畫。無論是在籃球場上的揮汗瞬間、足球場上的極速奔馳，我致力於捕捉那些稍縱即逝的爆發性時刻。",
-    "同時，我也喜歡透過人像來紀錄每個靈魂獨特的質感。目前軟體工程學系的研究生",
+    "I am a portrait and sports photographer based in Melbourne, Australia. My style blends precise motion capture with deep, story-driven character portraiture. Whether it is the intensity on a basketball court or the high-speed thrill of a football match, I am dedicated to capturing those fleeting, explosive moments.",
+    "At the same time, I love using portraiture to record the unique texture of every individual soul. I am currently a graduate student pursuing a degree in Software Engineering.",
   ],
 
   pricing: [
-    { name: 'Portrait', price: 'from NT$1,500', detail: ' 2 hours, one location, 25-30 edited images' },
-    { name: 'Sports Photography',  price: 'from NT$1000', detail: '1 hours, one location, 50-70 edited images' },
+    { name: 'Portrait', price: 'from AUD$200', detail: ' 2 hours, one location, 30-40 edited images' },
+    { name: 'Sports Photography',  price: 'from AUD$100', detail: '1 hours, one location, 50-70 edited images' },
   ],
 }
 
-// ── Your photographs ────────────────────────────────────────
-// Put your image files in  public/photos/  then list them here.
-// The path always starts with /photos/ — no "public" in the path.
-//
-// category  must match one of the categories below.
-// alt       describes the picture. Screen readers read it out loud
-//           and Google reads it too, so write a real sentence.
-
-// export const categories = ['Portrait', 'Sports']
-
-
-
-
+// About 頁右側的兩張照片：第一張大、第二張小
+export const aboutPhotos = [
+  { src: '/photos/me.jpg', alt: 'ENCHI CHANG 的肖像照' },
+  { src: '/photos/04.jpg', alt: '球場上的運動瞬間' },
+]

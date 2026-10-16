@@ -72,6 +72,8 @@ Stop the server with **Ctrl+C**.
 5. **`src/index.css`** — the colour and font variables are the first
    eight lines. Change `--accent` and the whole site changes with it.
 
+6. **`src/pages/Gallery`** - About recentwork
+
 ---
 
 ## Publishing it

@@ -1,7 +1,4 @@
-/* ───────────────────────────────────────────────────────────
-   All the styling for the site lives in this one file.
-   The variables at the top are the fastest thing to change.
-   ─────────────────────────────────────────────────────────── */
+/**/
 
 :root {
   --paper:  #F7FAFF;   /* near-white with a cool tint, not pure white */
@@ -19,6 +16,26 @@
 
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* ── 頁面區域：header 下方到 footer 上方 ─────────────────── */
+/* 讓 footer 永遠貼在畫面底部，main 撐滿中間的空間 */
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1; }
+
+/* 只有含 .page-center 的頁面，才把 main 變成直向 flex 來置中 */
+main:has(.page-center) {
+  display: flex;
+  flex-direction: column;
+}
+.page-center {
+  width: 100%;
+  margin: auto;   /* 上下左右都是 auto：以 header 與 footer 之間的區域為基準置中 */
 }
 
 *, *::before, *::after { box-sizing: inherit; }
@@ -85,85 +102,80 @@ p  { margin: 0 0 16px; max-width: 62ch; }
 
 /* ── Navigation: floating-transparent vs solid ──────────── */
 /* ── Navigation: floating rounded pill ──────────────────── */
+/* ── Navigation ─────────────────────────────────────────── */
 .nav {
-  position: fixed; left: 0; right: 0; z-index: 50;
-  top: calc(env(safe-area-inset-top, 0px) + 16px);
-  padding: 0 16px;
-  transition: top .25s ease;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  padding-top: env(safe-area-inset-top, 0px);
+  transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
-.nav-in {
-  max-width: var(--max); margin: 0 auto;
-  padding: 10px 12px 10px 20px;
-  border-radius: 50px;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 100px;
-  transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
+.nav-float { background: transparent; border-bottom: 1px solid transparent; }
+.nav-solid {
+  background: var(--paper);
+  border-bottom: 1px solid color-mix(in srgb, var(--rule) 55%, white);
 }
 
-.nav-float .nav-in {
-  background: rgba(2, 16, 36, .38);
-  border: 1px solid rgba(255,255,255,.16);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px -14px rgba(2,16,36,.5);
-}
-.nav-solid .nav-in {
-  background: var(--paper);
-  border: 1px solid color-mix(in srgb, var(--rule) 55%, white);
-  box-shadow: 0 10px 30px -16px rgba(2,16,36,.22);
+/* 三欄：Logo | 連結置中 | 右側功能 */
+.nav-in {
+  max-width: var(--max); margin: 0 auto;
+  min-height: 64px; padding: 0 22px;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 20px;
 }
 
 .wordmark {
-  display: flex; align-items: center; gap: px;
   font-weight: 700; font-size: 18px; letter-spacing: .02em;
-  text-decoration: none; white-space: nowrap;
+  text-decoration: none; white-space: nowrap; justify-self: start;
 }
-.logo-mark { display: inline-flex; }
 .nav-float .wordmark { color: #fff; }
 .nav-solid .wordmark { color: var(--ink); }
 
-/* Book button styled as the solid pill, like "Plan a trip" */
-.nav .btn.btn-sm {
-  border-radius: 850px;
-  padding: 9px 18px;
+.nav-links { display: flex; gap: 30px; }
+.nav-links a, .mobile-panel a {
+  text-decoration: none; font-weight: 500; font-size: 15px;
+  position: relative;
 }
-.nav-float .btn.btn-sm {
-  background: #fff; color: var(--ink);
-  border: 1px solid #fff;
+.nav-float .nav-links a { color: rgba(255,255,255,.92); }
+.nav-solid .nav-links a { color: var(--ink); }
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: -5px;
+  width: 0; height: 2px; background: currentColor;
+  transition: width .25s ease;
 }
-.nav-float .btn.btn-sm:hover { background: rgba(255,255,255,.88); }
-.nav-solid .btn.btn-sm { background: var(--accent); color: #fff; border: none; }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
-/* Hamburger becomes a small circular icon button, like the reference's icon buttons */
-.menu-toggle {
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  gap: 4px;
+.nav-right { justify-self: end; display: flex; align-items: center; gap: 16px; }
+.nav-social {
+  display: inline-flex; align-items: center; gap: 6px;
+  text-decoration: none; font-size: 15px; font-weight: 500;
 }
-.nav-float .menu-toggle { border-color: rgba(255,255,255,.4); }
-.nav-float .menu-toggle span { background: #fff; }
-.nav-solid .menu-toggle { border-color: color-mix(in srgb, var(--rule) 55%, white); }
-.nav-solid .menu-toggle span { background: var(--ink); }
+.nav-float .nav-social { color: #fff; }
+.nav-solid .nav-social { color: var(--ink); }
 
-.menu-panel { top: calc(100% + 12px); }
+/* 右側黑色（或白色）膠囊按鈕，對應圖中的 Sign in */
+.nav .btn.btn-sm { border-radius: 999px; padding: 8px 18px; font-size: 14px; }
+.nav-float .btn.btn-sm { background: #fff; color: var(--ink); }
+.nav-solid .btn.btn-sm { background: var(--accent); color: #fff; }
 
-main { padding-top: 62px; }
-.hero-full { margin-top: -62px; padding-top: 62px; }
+/* 手機版：連結移到第二排，不需要漢堡選單 */
+@media (max-width: 800px) {
+  .nav-in {
+    grid-template-columns: 1fr auto;
+    min-height: 0;
+    padding: 10px 22px;
+    row-gap: 6px;
+  }
+  .nav-links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: space-between;
+    gap: 16px;
+    overflow-x: auto;
+  }
+  .nav-social span { display: none; }
 
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  height: 34px; /* forces the button and icon to share one exact row height */
-}
-.nav .btn.btn-sm {
-  height: 100%;
-  display: inline-flex; align-items: center;
-  padding: 0 16px;
-  border-radius: 999px;
-}
-.menu-toggle {
-  height: 100%; width: 34px;
-  border-radius: 50%;
+  /* 手機 header 變成兩排，高度約 92px，內容要讓出同樣距離 */
+  main { padding-top: 92px; }
+  .hero-full { margin-top: -92px; padding-top: 92px; }
 }
 
 /* the hamburger icon itself */
@@ -247,7 +259,13 @@ main { padding-top: 62px; }
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 14px;
 }
-.grid-img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; background: var(--rule); }
+.grid-img {
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  object-position: center 30%;     /* keeps the top of the photo in frame when cropping */
+  background: var(--rule);
+}
 .grid-btn { padding: 0; border: none; background: none; cursor: zoom-in; display: block; }
 .grid-btn:hover .grid-img { opacity: .9; }
 
@@ -292,11 +310,74 @@ main { padding-top: 62px; }
 .lb-prev { left: 4px; }
 .lb-next { right: 4px; }
 
-/* ── About ───────────────────────────────────────────────── */
-.about-grid { display: grid; grid-template-columns: 1fr; gap: 34px; }
-.about-img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--rule); }
-@media (min-width: 820px) {
-  .about-grid { grid-template-columns: 5fr 7fr; gap: 48px; align-items: start; }
+/* ── About：藍灰底 + 白色圓角卡片 ────────────────────────── */
+.about-band {
+  background: color-mix(in srgb, var(--rule) 38%, white);
+  min-height: calc(100vh - 64px);   /* 扣掉 header 高度 */
+  display: flex;
+  align-items: center;              /* 卡片上下置中 */
+  justify-content: center;
+  padding: 36px 22px;
+}
+
+.about-card {
+  max-width: 1480px;          /* 原本 1180px（--max），這是卡片整體寬度的上限 */
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 28px;
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: center;
+  box-shadow: 0 22px 54px -30px rgba(2, 16, 36, .28);
+}
+
+main:has(.about-band) + .footer-dark { margin-top: 0; }
+
+@media (min-width: 860px) {
+  .about-card {
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    padding: 44px 44px 44px 52px;
+  }
+}
+
+/* 小標籤（對應圖中的 HIGHLIGHTED FEATURE） */
+.about-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--rule) 55%, white);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+.about-copy h1 { color: var(--ink); }                 /* 最深的藍黑 #021024 */
+.about-copy p  { color: #052659; }                    /* 深藍，取代原本偏淺的藍 */
+.about-badge   { color: #052659; }
+
+.about-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+
+/* 白底淺邊框的次要按鈕（對應圖中的 See all features） */
+.btn-light {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid color-mix(in srgb, var(--rule) 55%, white);
+}
+.btn-light:hover { background: var(--paper); opacity: 1; }
+.about .btn, .about-actions .btn { border-radius: var(--radius); }
+
+/* 右側大圖 */
+.about-visual {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 16px;
 }
 
 /* ── Pricing ─────────────────────────────────────────────── */
@@ -318,6 +399,13 @@ main { padding-top: 62px; }
   margin-top: 40px;
   padding: 44px 22px calc(env(safe-area-inset-bottom, 0px) + 34px);
 }
+
+.footer-dark {
+  background: var(--ink); color: #fff;
+  padding: 56px 22px calc(env(safe-area-inset-bottom, 0px) + 26px);
+  margin-top: 0;   /* 原本是 60px */
+}
+
 .footer-in {
   max-width: var(--max); margin: 0 auto;
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 26px;
@@ -375,10 +463,10 @@ main { padding-top: 62px; }
 .collections-two {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   max-width: none;          /* fills the section's full width instead of being capped */
-  gap: 16px;
+  gap: 30px;
 }
 .collections-two .collection-card {
-  aspect-ratio: 4 / 3;      /* landscape, not portrait — wider than tall */
+  aspect-ratio: 16 / 9;      /* landscape, not portrait — wider than tall */
 }
 .collections-two .collection-caption {
   padding: 14px 16px;
