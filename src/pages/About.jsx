@@ -1,24 +1,39 @@
 import { Link } from 'react-router-dom'
-import { site } from '../data/site.js'
+import { site, aboutPhotos } from '../data/site.js'
 import Photo from '../components/Photo.jsx'
 
 export default function About() {
+  // 右側大圖用 aboutPhotos 的第一張
+  const main = aboutPhotos[0]
+
   return (
-    <section className="section about">
-      <div className="about-grid">
-        <Photo src="/photos/me.jpg" alt={`${site.name}, photographer`} className="about-img" />
-        <div>
-          <h1>About</h1>
+    <div className="about-band">
+      <section className="about-card page-center">
+        {/* 左：標籤、標題、文字、按鈕 */}
+        <div className="about-copy">
+          <span className="about-badge">關於我 · About me</span>
+          <h1>{site.aboutTitle || site.name}</h1>
+
           {site.about.map((paragraph, i) => (
-            <p key={i}>{paragraph}</p>
+            <p key={i} className="muted">{paragraph}</p>
           ))}
-          <p>
-            <a href={`mailto:${site.email}`}>{site.email}</a>
-            {' · '}
-            <Link to="/book">Book a session</Link>
-          </p>
+
+          <div className="about-actions">
+            <Link to="/book" className="btn">預約拍攝</Link>
+            <a
+              href={site.instagram}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-light"
+            >
+              Instagram
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+
+        {/* 右：大圖 */}
+        <Photo src={main.src} alt={main.alt} className="about-visual" />
+      </section>
+    </div>
   )
 }

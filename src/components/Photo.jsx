@@ -2,7 +2,8 @@ import { useState } from 'react'
 
 // A single image that degrades gracefully: if the file is missing,
 // you get a neutral block and the alt text instead of a broken icon.
-export default function Photo({ src, alt, className = '', onClick, eager = false }) {
+// Was: export default function Photo({ src, alt, className = '', onClick, eager = false }) {
+export default function Photo({ src, alt, className = '', onClick, eager = false, style }) {
   const [failed, setFailed] = useState(false)
 
   if (failed) {
