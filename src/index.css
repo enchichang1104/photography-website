@@ -716,3 +716,251 @@ main:has(.about-band) + .footer-dark { margin-top: 0; }
   .quick-card { flex-direction: column; align-items: stretch; }
   .work-grid { grid-template-columns: 1fr 1fr; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   手機版：App 風格（只在寬度 ≤ 800px 生效，桌機不受影響）
+   ═══════════════════════════════════════════════════════════
+*/
+.tabbar { display: none; }.hero-cta { display: none; }
+
+@media (max-width: 800px) {
+  :root { --paper: #EEF3FA; }                       /* 藍灰底，讓白卡片浮起來 */
+  html, body { max-width: 100%; overflow-x: clip; }
+  img { max-width: 100%; }
+
+  /* ── 頂部列：單排，Logo + Instagram 圓鈕 + 預約 ── */
+  .nav-in { grid-template-columns: 1fr auto; min-height: 56px; padding: 0 16px; gap: 10px; }
+  .nav-links { display: none; }
+  .nav-solid { background: rgba(238,243,250,.86); backdrop-filter: blur(14px); border-bottom: none; }
+  .wordmark { font-size: 17px; }
+  .nav-right { gap: 8px; }
+  .nav-social { width: 38px; height: 38px; justify-content: center; border-radius: 50%; }
+  .nav-social span { display: none; }
+  .nav-float .nav-social { background: rgba(255,255,255,.2); backdrop-filter: blur(8px); }
+  .nav-solid .nav-social { background: #fff; box-shadow: 0 6px 16px -8px rgba(2,16,36,.3); }
+  .nav .btn.btn-sm { padding: 9px 16px; font-size: 14px; }
+
+  main { padding-top: 56px; }
+
+  /* ── 底部浮動膠囊導覽列 ── */
+  .tabbar {
+    position: fixed; z-index: 60;
+    left: 16px; right: 16px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(14px);
+    border-radius: 999px;
+    border: 1px solid rgba(2,16,36,.06);
+    box-shadow: 0 14px 34px -14px rgba(2,16,36,.35);
+  }
+  .tabbar a {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    height: 44px; min-width: 44px; padding: 0 12px;
+    border-radius: 999px;
+    color: #5483B3; text-decoration: none;
+    font-size: 14px; font-weight: 600;
+    transition: background .2s ease, color .2s ease;
+  }
+  .tabbar a span { display: none; }
+  .tabbar a.active { background: var(--ink); color: #fff; padding: 0 18px; }
+  .tabbar a.active span { display: inline; }
+
+  /* ── 首頁 hero：16:9 橫向圓角方框，文字在上、按鈕在下 ── */
+  main .hero-full {
+    height: auto;
+    min-height: auto;
+    max-height: none;
+    aspect-ratio: 7 / 5;          /* 想改比例就改這裡，例如 4 / 3 會比較高 */
+    margin: 12px 16px 0;
+    padding: 0;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  main .hero-full .hero-bg,
+  main .hero-full .hero-scrim {
+    top: 0; left: 0; right: 0; bottom: 0;
+    height: 100%;
+    border-radius: 26px;
+  }
+  main .hero-full .hero-scrim {
+    background: linear-gradient(180deg, rgba(2,16,36,0) 20%, rgba(2,16,36,.86) 100%);
+  }
+
+  /* 內容照順序往下排：標題 → 說明 → 按鈕，不用絕對定位 */
+  main .hero-full .hero-overlay {
+    position: relative; inset: auto;
+    display: flex; flex-direction: column;
+    justify-content: flex-end; align-items: stretch;
+    height: auto; gap: 0;
+    padding: 14px 16px 14px;
+    text-align: left;
+  }
+  main .hero-full .hero-copy {
+    height: auto; display: block; padding: 0; margin: 0; flex-shrink: 0;
+  }
+  .hero-copy h1 { font-size: 26px; line-height: 1.05; margin: 0 0 4px; }
+  .hero-copy p {
+    font-size: 12.5px; line-height: 1.45; max-width: 36ch;
+    color: rgba(255,255,255,.86); margin: 0 0 12px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  .quick-card { display: none; }
+
+  .hero-cta {
+    flex-shrink: 0;
+    height: 46px; padding: 0 5px 0 20px;
+    font-size: 15px;
+  }
+  .hero-cta-arrow { width: 36px; height: 36px; font-size: 17px; }
+
+  /* 大圖不再延伸到標題列後面，所以首頁的標題列也要一直是實色 */
+  .nav-float {
+    background: rgba(238,243,250,.86);
+    backdrop-filter: blur(14px);
+  }
+  .nav-float .wordmark { color: var(--ink); }
+  .nav-float .nav-social {
+    background: #fff; color: var(--ink);
+    box-shadow: 0 6px 16px -8px rgba(2,16,36,.3);
+  }
+  .nav-float .btn.btn-sm { background: var(--accent); color: #fff; }
+
+  /* 首頁頂端透明時，右上的預約按鈕先隱藏（下方已有大按鈕），捲動後會再出現 */
+  .nav-float .btn.btn-sm { display: none; }
+
+  /* 預約卡片：白色圓角面板 + 深藍大按鈕（像參考圖的 Book Consultation） */
+  .quick-card {
+    position: relative; flex-direction: column; align-items: stretch;
+    gap: 12px; margin-top: -40px; padding: 18px;
+    border-radius: 28px;
+    box-shadow: 0 24px 50px -24px rgba(2,16,36,.45);
+  }
+  .quick-field select, .quick-field input {
+    width: 100%; border-radius: 14px; padding: 12px 14px;
+    background: #F4F7FC; border-color: transparent;
+  }
+  .quick-btn {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 14px 14px 22px; border-radius: 22px;
+    background: linear-gradient(135deg, #021024, #052659);
+    font-size: 16px; text-align: left;
+  }
+  .quick-btn::after {
+    content: '→'; display: grid; place-items: center;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #fff; color: #052659; font-size: 18px;
+  }
+
+  /* ── 統計：淺藍漸層卡，四欄中間有細線（像 Health Overview） ── */
+  .stat-row {
+    max-width: none; margin: 16px 16px 0; padding: 0; z-index: auto;
+    grid-template-columns: repeat(4, 1fr); gap: 0;
+    background: linear-gradient(135deg, #E4F2FF, #C1E8FF);
+    border-radius: 26px; overflow: hidden;
+  }
+  .stat-card { background: none; box-shadow: none; border-radius: 0; padding: 16px 4px; }
+  .stat-card + .stat-card { border-left: 1px solid rgba(5,38,89,.14); }
+  .stat-value { font-size: 20px; }
+  .stat-label { font-size: 11px; line-height: 1.3; }
+
+  .section { padding: 36px 16px; }
+
+    /* ── 近期作品：四張卡片同樣大小，單欄直排 ── */
+  .work-grid { grid-template-columns: 1fr; gap: 14px; }
+  .work-card { position: relative; border: none; border-radius: 26px; }
+  .work-card-img { aspect-ratio: 16 / 11; }
+  .work-card-body {
+    position: absolute; inset: auto 0 0 0;
+    padding: 40px 66px 18px 18px;
+    background: linear-gradient(180deg, transparent, rgba(2,16,36,.82));
+  }
+  .work-card-label { color: #C1E8FF; font-size: 11px; margin-bottom: 2px; }
+  .work-card-body h3 { color: #fff; font-size: 18px; margin: 0; }
+  .work-card-body p.muted { display: block; color: rgba(255,255,255,.78); margin: 4px 0 0; }
+  .work-card::after {
+    content: '→'; position: absolute; right: 14px; bottom: 14px;
+    width: 38px; height: 38px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: rgba(255,255,255,.92); color: #052659; font-size: 17px;
+  }
+
+  /* ── How it works：白色卡片 + 四個圓形圖示（像 Quick Access） ── */
+  .how-row {
+    grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 20px;
+    background: #fff; border-radius: 26px; padding: 20px 8px;
+    box-shadow: 0 14px 34px -22px rgba(2,16,36,.25);
+  }
+  .how-step { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+  .how-step svg {
+    box-sizing: content-box; padding: 13px; margin: 0;
+    background: #DCEBFF; border-radius: 50%; color: var(--accent);
+  }
+  .how-step h3 { font-size: 12px; line-height: 1.3; font-weight: 500; margin: 0; }
+  .how-step p { display: none; }
+
+  /* ── 服務類型：兩張並排圖片卡 ── */
+  .collections-two { grid-template-columns: 1fr 1fr; max-width: none; gap: 12px; }
+  .collections-two .collection-card { aspect-ratio: 4 / 5; border-radius: 26px; }
+  .collections-two .collection-caption { padding: 14px; }
+  .collections-two .collection-caption h3 { font-size: 16px; }
+
+  /* ── 客戶評價：白色圓角卡 ── */
+  .testi-row { gap: 8px; }
+  .testi-card {
+    flex: 1; min-width: 0;
+    background: #fff; border-radius: 28px; padding: 24px 18px;
+    box-shadow: 0 14px 34px -22px rgba(2,16,36,.25);
+  }
+  .testi-arrow { width: 34px; height: 34px; font-size: 18px; background: #fff; }
+
+  /* ── Work 頁：分類膠囊可橫向滑動、圖片圓角 ── */
+  .filters {
+    flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+    margin: 0 -16px 20px; padding: 0 16px 4px;
+  }
+  .filters::-webkit-scrollbar { display: none; }
+  .chip { flex-shrink: 0; background: #fff; padding: 9px 18px; }
+  .chip.is-on { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .grid-masonry { column-gap: 10px; }
+  .grid-masonry .grid-btn { margin-bottom: 10px; }
+  .grid-btn { border-radius: 18px; overflow: hidden; }
+  .grid-img { border-radius: 18px; }
+
+  /* ── Pricing：每一項變成白色圓角卡 ── */
+  .price-list { border-top: none; display: grid; gap: 12px; }
+  .price-list li {
+    background: #fff; border: none; border-radius: 22px; padding: 18px;
+    box-shadow: 0 14px 34px -24px rgba(2,16,36,.25);
+  }
+  .price {
+    background: #DCEBFF; color: var(--accent);
+    padding: 6px 12px; border-radius: 999px; font-size: 14px;
+  }
+
+  /* ── About：圖片移到文字上方 ── */
+  .about-band { min-height: 0; display: block; padding: 16px 16px 28px; }
+  .about-card { padding: 16px; gap: 20px; border-radius: 28px; }
+  .about-visual { order: -1; aspect-ratio: 1 / 1; border-radius: 20px; }
+  .about-copy h1 { font-size: 28px; }
+
+  /* ── Book：表單圓角 ── */
+  .form-wrap {
+    border: none; border-radius: 22px; overflow: hidden;
+    box-shadow: 0 14px 34px -24px rgba(2,16,36,.25);
+  }
+
+  /* ── Footer：上方圓角，底部留空間給導覽列 ── */
+  .footer-dark {
+    border-radius: 28px 28px 0 0; margin-top: 0;
+    padding: 40px 22px calc(env(safe-area-inset-bottom, 0px) + 108px);
+  }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px 18px; }
+  .footer-grid > div:first-child,
+  .footer-grid > div:last-child { grid-column: 1 / -1; }
+}
