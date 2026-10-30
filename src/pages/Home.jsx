@@ -48,11 +48,17 @@ export default function Home() {
         ))}
         <div className="hero-scrim" />
 
-        <div className="hero-overlay">
+      <div className="hero-overlay">
+        <div className="hero-copy">
           <h1>{site.name}</h1>
           <p>{site.tagline}</p>
-          <QuickBooking />
         </div>
+        <QuickBooking />
+        <Link to="/book" className="hero-cta">
+          <span>Book a session</span>
+          <span className="hero-cta-arrow" aria-hidden="true">→</span>
+        </Link>
+      </div>
       </section>
 
       {/* ── Stat row, overlapping the hero's bottom edge ── */}

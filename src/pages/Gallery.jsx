@@ -45,7 +45,7 @@ export default function Gallery() {
   }
 
   return (
-    <section className="section">
+    <section className="section-up">
       <h1>Work</h1>
 
       <div className="filters">

@@ -141,8 +141,15 @@ export const sessionTypes = [
 
 // ── The floating quick-check card in the hero ──────────────
 export const quickBookingForm = {
-  sessionTypeEntry: '', // e.g. 'entry.123456789'
-  dateEntry: '',        // e.g. 'entry.987654321'
+  sessionTypeEntry: 'entry.1625243579',   // 服務類型那題
+  dateEntry:        'entry.528656121',    // 日期那題
+
+  // 網站上的服務名稱 → 表單選項的文字
+  // 你剛剛選的選項是 "Sports"，但網站上叫 "Sports Photography"，所以需要對照
+  sessionValues: {
+    'Portrait': 'Portrait',
+    'Sports Photography': 'Sports',
+  },
 }
 
 export const highlight = {
@@ -176,8 +183,8 @@ export const site = {
   instagram: 'https://www.instagram.com/photoenchigrapher?stkn=MXNpc3l3ZDV0c2M5cw%3D%3D&utm_source=qr',
 
   // ── Your Google Form ──────────────────────────────────────
-  formLink: 'https://forms.gle/REPLACE_ME',
-  formEmbed: 'https://forms.gle/tjtMUed4PJh5e9uB8',
+  formLink:  'https://docs.google.com/forms/d/e/1FAIpQLScoo_A7qW8KG3kdTbGpX04K30B_iWvSFcWCO3DhQuZy44ZmcA/viewform',
+  formEmbed: 'https://docs.google.com/forms/d/e/1FAIpQLScoo_A7qW8KG3kdTbGpX04K30B_iWvSFcWCO3DhQuZy44ZmcA/viewform?embedded=true',
 
   aboutTitle: 'EN-CHI CHANG',
 
@@ -196,4 +203,16 @@ export const site = {
 export const aboutPhotos = [
   { src: '/photos/me.jpg', alt: 'ENCHI CHANG 的肖像照' },
   { src: '/photos/04.jpg', alt: '球場上的運動瞬間' },
+]
+
+// ── 我的行程：不能接案的日子 ──────────────────────────────
+// 日期格式是 'YYYY-MM-DD'。
+// 單日直接寫字串；連續幾天用 { from, to }（含頭尾）。
+export const busyDates = [
+  '2026-11-12',
+  '2026-11-13',
+  '2026-11-16',
+  { from: '2026-12-21', to: '2027-01-03' },
+  { from: '2027-02-06', to: '2027-02-20' },
+  { from: '2027-02-22', to: '2027-02-26' },
 ]
