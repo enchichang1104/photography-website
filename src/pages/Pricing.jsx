@@ -3,7 +3,7 @@ import { site } from '../data/site.js'
 
 export default function Pricing() {
   return (
-    <section className="section narrow">
+    <section className="section-up narrow">
       <h1>Pricing</h1>
       <p className="muted">
         Every session is different, so treat these as starting points.
